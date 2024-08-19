@@ -1,4 +1,6 @@
 # Progressive Screenshots
+as of commit 8, saved routes section is done
+![gif](https://github.com/user-attachments/assets/9002123b-304f-43af-8418-5c783372225e)
 
 as of commit 6, sidebar main menu and switching logic done
 
