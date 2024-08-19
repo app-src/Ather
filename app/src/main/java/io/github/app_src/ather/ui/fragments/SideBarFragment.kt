@@ -1,15 +1,16 @@
-package io.github.app_src.ather
+package io.github.app_src.ather.ui.fragments
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import io.github.app_src.ather.databinding.ActivityMainBinding
+import io.github.app_src.ather.adapters.MainMenuListAdapter
+import io.github.app_src.ather.R
+import io.github.app_src.ather.utils.SideBarMainMenuItem
 import io.github.app_src.ather.databinding.FragmentSideBarBinding
+import io.github.app_src.ather.ui.MainActivity
 
 
 class SideBarFragment : Fragment() {

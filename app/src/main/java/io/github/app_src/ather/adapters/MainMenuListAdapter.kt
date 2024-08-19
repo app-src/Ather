@@ -1,4 +1,4 @@
-package io.github.app_src.ather
+package io.github.app_src.ather.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import io.github.app_src.ather.R
+import io.github.app_src.ather.utils.SideBarMainMenuItem
 
 class MainMenuListAdapter (context: Context, private val items: List<SideBarMainMenuItem>) :
     ArrayAdapter<SideBarMainMenuItem>(context, 0, items) {
 
-        private var selectedSideBarMainMenuItem: Int = 0
+        private var selectedSideBarMainMenuItem: Int = -1
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val item = getItem(position)

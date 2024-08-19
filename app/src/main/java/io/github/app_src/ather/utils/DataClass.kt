@@ -1,4 +1,4 @@
-package io.github.app_src.ather
+package io.github.app_src.ather.utils
 
 
 data class SideBarMainMenuItem(
