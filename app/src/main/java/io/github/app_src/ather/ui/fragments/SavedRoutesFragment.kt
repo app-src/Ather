@@ -88,7 +88,9 @@ class SavedRoutesFragment : Fragment() {
                         setPadding(36, 18, 36, 18)
                         setMargins(8, 8, 8, 8)
                     }
-                    if (selectedSideBarSubMenuItem == label) {
+                    if (selectedSideBarSubMenuItem == label || selectedSideBarSubMenuItem == "") {
+                        selectedSideBarSubMenuItem = label
+                        listener!!.OnSideBarSubMenuItemSelected(label)
                         background = ResourcesCompat.getDrawable(resources, R.drawable.rounded_corner_background, null)
                         setTextColor(resources.getColor(R.color.dark, null))
                     }else {
