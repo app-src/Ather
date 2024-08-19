@@ -1,5 +1,10 @@
 # Progressive Screenshots
-also, the list of sub menu is dynamic and could be easily edited implemented in such a way as this would be changing as per the usage of the user  
+as of commit 12, items from sub menu can be selected and their corresponding page loads next to them and also the first sub menu is selected by default. Hereby all the requirements of the assignment are done ✅ except the keyboard input ❌
+
+![gif-20240820-050814](https://github.com/user-attachments/assets/deefa95d-99ee-4649-82e2-21f650efd4c5)
+
+
+also, the list of sub menu is dynamic and could be easily edited implemented in such a way as this would be changing as per the usage of the user 
 ![image](https://github.com/user-attachments/assets/2cf09c3b-8567-48db-a852-0dc179271464)  
 
 as of commit 8, saved routes section is done  
