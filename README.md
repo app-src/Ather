@@ -1,8 +1,12 @@
 # Progressive Screenshots
-as of commit 8, saved routes section is done
-![gif](https://github.com/user-attachments/assets/9002123b-304f-43af-8418-5c783372225e)
+also, the list of sub menu is dynamic and could be easily edited implemented in such a way as this would be changing as per the usage of the user  
+![image](https://github.com/user-attachments/assets/2cf09c3b-8567-48db-a852-0dc179271464)  
 
-as of commit 6, sidebar main menu and switching logic done
+as of commit 8, saved routes section is done  
+
+![gif](https://github.com/user-attachments/assets/9002123b-304f-43af-8418-5c783372225e)  
+
+as of commit 6, sidebar main menu and switching logic done  
 
 ![gif](https://github.com/user-attachments/assets/01295eee-7829-41ae-b6c3-752d9c37add0)
 
