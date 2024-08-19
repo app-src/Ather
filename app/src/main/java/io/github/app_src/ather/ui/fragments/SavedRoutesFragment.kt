@@ -17,11 +17,18 @@ import androidx.core.content.res.ResourcesCompat
 import io.github.app_src.ather.R
 import io.github.app_src.ather.databinding.FragmentSavedRoutesBinding
 import io.github.app_src.ather.databinding.ItemSidebarSubMenuBinding
+import io.github.app_src.ather.ui.fragments.SideBarFragment.OnSideBarMainMenuItemSelectedListener
+import io.github.app_src.ather.utils.SideBarMainMenuItem
 
 class SavedRoutesFragment : Fragment() {
 
     private var _binding: FragmentSavedRoutesBinding? = null
     private val binding get() = _binding!!
+    private var listener: OnSideBarSubMenuItemSelectedListener? = null
+
+    interface OnSideBarSubMenuItemSelectedListener {
+        fun OnSideBarSubMenuItemSelected(item: String)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +44,8 @@ class SavedRoutesFragment : Fragment() {
         )
 
         // Set up the adapter
-        val adapter = CustomAdapter(requireContext(), data)
+        val adapter = CustomAdapter(requireContext(), data,listener)
         binding.listView.adapter = adapter
-
         return binding.root
     }
 
@@ -51,8 +57,11 @@ class SavedRoutesFragment : Fragment() {
     // Custom Adapter for the ListView
     private class CustomAdapter(
         context: Context,
-        private val data: List<Pair<String, List<String>>>
+        private val data: List<Pair<String, List<String>>>,
+        private val listener: OnSideBarSubMenuItemSelectedListener?,
     ) : ArrayAdapter<Pair<String, List<String>>>(context, 0, data) {
+
+        private var selectedSideBarSubMenuItem: String = ""
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val binding = if (convertView == null) {
@@ -79,16 +88,31 @@ class SavedRoutesFragment : Fragment() {
                         setPadding(36, 18, 36, 18)
                         setMargins(8, 8, 8, 8)
                     }
-                    background = ResourcesCompat.getDrawable(resources, R.drawable.rounded_corner_grey_background, null)
-                    setTextColor(resources.getColor(R.color.white, null))
-                    setOnClickListener {
-                        Toast.makeText(context, "Clicked: $label", Toast.LENGTH_SHORT).show()
+                    if (selectedSideBarSubMenuItem == label) {
+                        background = ResourcesCompat.getDrawable(resources, R.drawable.rounded_corner_background, null)
+                        setTextColor(resources.getColor(R.color.dark, null))
+                    }else {
+                        background = ResourcesCompat.getDrawable(resources, R.drawable.rounded_corner_grey_background, null)
+                        setTextColor(resources.getColor(R.color.white, null))
+                    }
+                    setOnClickListener{
+                        selectedSideBarSubMenuItem = label
+                        listener!!.OnSideBarSubMenuItemSelected(label)
+                        notifyDataSetChanged()
                     }
                 }
                 binding.buttonContainer.addView(button)
             }
 
             return binding.root
+        }
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnSideBarSubMenuItemSelectedListener) {
+            listener = context
+        } else {
+            throw ClassCastException("$context must implement OnItemSelectedListener")
         }
     }
 }

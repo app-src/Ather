@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,8 +15,9 @@ import io.github.app_src.ather.utils.SideBarMainMenuItem
 import io.github.app_src.ather.databinding.ActivityMainBinding
 import io.github.app_src.ather.ui.fragments.SavedRoutesFragment
 import io.github.app_src.ather.ui.fragments.SideBarFragment
+import io.github.app_src.ather.ui.fragments.SubMenuDetailsFragment
 
-class MainActivity : AppCompatActivity(), SideBarFragment.OnSideBarMainMenuItemSelectedListener{
+class MainActivity : AppCompatActivity(), SideBarFragment.OnSideBarMainMenuItemSelectedListener, SavedRoutesFragment.OnSideBarSubMenuItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,17 +49,19 @@ class MainActivity : AppCompatActivity(), SideBarFragment.OnSideBarMainMenuItemS
     }
 
     override fun OnSideBarMainMenuItemSelected(item: SideBarMainMenuItem) {
-        binding.mainMenuDetailFragmentContainer!!.visibility = View.VISIBLE
+        binding.subMenuFragmentContainer!!.visibility = View.VISIBLE
+        binding.subMenuDetailsFragmentContainer!!.visibility = View.VISIBLE
         binding.blurLayer!!.visibility = View.VISIBLE
         when(item.title) {
             "Location"-> {
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.mainMenuDetailFragmentContainer, SavedRoutesFragment())
+                    .replace(R.id.subMenuFragmentContainer, SavedRoutesFragment())
                     .commit()
             }
             else -> {
-                binding.mainMenuDetailFragmentContainer!!.visibility = View.GONE
+                binding.subMenuFragmentContainer!!.visibility = View.GONE
+                binding.subMenuDetailsFragmentContainer!!.visibility = View.GONE
                 binding.blurLayer!!.visibility = View.GONE
             }
 //            "Bluetooth" -> {
@@ -73,5 +77,15 @@ class MainActivity : AppCompatActivity(), SideBarFragment.OnSideBarMainMenuItemS
 //                    .commit()
 //            }
         }
+    }
+    override fun OnSideBarSubMenuItemSelected(item: String) {
+        val subMenuDetailsFragment = supportFragmentManager.findFragmentById(R.id.subMenuDetailsFragmentContainer) as SubMenuDetailsFragment
+        subMenuDetailsFragment.requireView().findViewById<TextView>(R.id.subMenuDetailsText).text = "Custom Page for "+item
+        binding.blurLayer!!.visibility = View.VISIBLE
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container_view_side_bar, SideBarFragment())
+            .commit()
+
     }
 }
